@@ -23,14 +23,17 @@ try{
     /* Execute  the statement to insert a row */
     $affectedRows = $stmt->execute();
     
-    
-    echo "Records inserted successfully.";
-    echo "Row affected " . $affectedRows . '  ';
+    if ($affectedRows  > 0) {
+        echo ("<SCRIPT LANGUAGE='JavaScript'>
+            window.alert('Name inserted successfully.')
+            window.location.href='index.php'
+            </SCRIPT>");
+        exit();
 
+    } else {
+        echo ("Insertion failed");
+    } 
 
-    //foreach($connection->query('SELECT * FROM posts') as $row) {
-        //echo $row['id'] . ' ' . $row['name'];
-    //}
     // Attempt select query execution
     try{
         $sql = "SELECT * FROM posts";  
