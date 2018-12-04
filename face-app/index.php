@@ -61,64 +61,32 @@
                                 die("ERROR: Could not able to execute $sql. " . $e->getMessage());
                             }
 
-
                             // check if the botton submit got pressed
                             if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit'])){
-                                submit();
-                            }
-                            
-                            // Attempt insert query execution
-                            function submit(){
-                                 
-                            // Attempt insert query execution
-                            try{
-                                // Prepare an insert statement
-                                $sql = "INSERT INTO posts (name) VALUES (:name)";
-                                $stmt = $connection->prepare($sql);
-    
-                                // Bind parameters to statement
-                                $stmt->bindParam(':name', $_REQUEST['name']);
-    
-    
-                                /* Execute  the statement to insert a row */
-                                $affectedRows = $stmt->execute();
-    
-                                if ($affectedRows  > 0) {
-                                    echo ("<SCRIPT LANGUAGE='JavaScript'>
-                                        window.alert('Your Name inserted successfully.')
-                                        window.location.href='index.php'
-                                        </SCRIPT>");
-                                    exit();
-    
-                                } else {
-                                    echo ("Insertion failed");
-                                } 
-    
-                                // Attempt select query execution
+                                                            
+                                // Attempt insert query execution
                                 try{
-                                    $sql = "SELECT * FROM posts";  
-                                    $result = $connection->query($sql);
-                                    if($result->rowCount() > 0){
-                                        echo "<table>";
-                                            echo "<tr>";
-                                                echo "<th>id</th>";
-                                                echo "<th>name</th>";
-                                            echo "</tr>";
-                                        while($row = $result->fetch()){
-                                            echo "<tr>";
-                                                echo "<td>" . $row['id'] . "</td>";
-                                                echo "<td>" . $row['name'] . "</td>";
-                                            echo "</tr>";
-                                        }
-                                        echo "</table>";
-                                        // Free result set
-                                        unset($result);
-                                    } else{
-                                        echo "No records matching your query were found.";
-                                    }
-                                } catch(PDOException $e){
-                                    die("ERROR: Could not able to execute $sql. " . $e->getMessage());
-                                }
+                                    // Prepare an insert statement
+                                    $sql = "INSERT INTO posts (name) VALUES (:name)";
+                                    $stmt = $connection->prepare($sql);
+        
+                                    // Bind parameters to statement
+                                    $stmt->bindParam(':name', $_REQUEST['name']);
+        
+        
+                                    /* Execute  the statement to insert a row */
+                                    $affectedRows = $stmt->execute();
+        
+                                    if ($affectedRows  > 0) {
+                                        echo ("<SCRIPT LANGUAGE='JavaScript'>
+                                            window.alert('Your Name inserted successfully.')
+                                            window.location.href='index.php'
+                                            </SCRIPT>");
+                                        exit();
+        
+                                    } else {
+                                        echo ("Insertion failed");
+                                    } 
     
                                 } catch(PDOException $e){
                                     die("ERROR: Could not prepare/execute query: $sql. " . $e->getMessage());
@@ -129,9 +97,7 @@
                         } catch(PDOException $e){
                             die("ERROR: Could not prepare/execute query: $sql. " . $e->getMessage());
                         }
-                        
-                        
-                            
+                                                    
                         // Close statement
                         unset($stmt);
                             
